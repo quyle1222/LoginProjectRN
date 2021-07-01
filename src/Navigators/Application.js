@@ -7,6 +7,7 @@ import { navigationRef } from '@/Navigators/Root';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { useTheme } from '@/Theme';
 import { DetailsContainer } from '@/Containers';
+import { navigationConstant } from '@/Services/utils/Navigation';
 
 const Stack = createStackNavigator();
 
@@ -40,18 +41,27 @@ const ApplicationNavigator = () => {
       <NavigationContainer theme={NavigationTheme} ref={navigationRef}>
         <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
         <Stack.Navigator headerMode={'none'}>
-          <Stack.Screen name="Startup" component={IndexStartupContainer} />
+          <Stack.Screen
+            name={navigationConstant.STARTUP}
+            component={IndexStartupContainer}
+          />
           {isApplicationLoaded && MainNavigator != null && (
             <Stack.Screen
-              name="Home"
+              name={navigationConstant.HOME}
               component={MainNavigator}
               options={{
                 animationEnabled: false,
               }}
             />
           )}
-          <Stack.Screen name="Main" component={DetailsContainer} />
-          <Stack.Screen name="Login" component={LoginContainer} />
+          <Stack.Screen
+            name={navigationConstant.MAIN}
+            component={DetailsContainer}
+          />
+          <Stack.Screen
+            name={navigationConstant.LOGIN}
+            component={LoginContainer}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>

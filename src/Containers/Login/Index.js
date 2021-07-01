@@ -1,66 +1,64 @@
 import { ButtonLogin } from '@/Components';
-import { LoginService } from '@/Services/Login/Index';
+import { loginService } from '@/Services/Login/Index';
 import { useTheme } from '@/Theme';
 import React, { useState } from 'react';
 import { Alert, Image, Text, TextInput, View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { LocalStorage } from '@/Services/utils/LocalStorage';
 import FetchUserInfo from '@/Store/UserInfo/FetchUserInfo';
+import { navigationConstant } from '@/Services/utils/Navigation';
 const LoginContainer = ({ navigation }) => {
   const { Gutters, Layout, Images, Container } = useTheme();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('lethuhien.qn96@gmail.com');
-  const [password, setPassword] = useState('pss201806');
-  const ActionLogin = () => {
-    if (!email || !password) {
-      return Alert.alert(
-        'Notification',
-        'User email and password is required !',
-      );
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { t } = useTranslation();
+  const actionLogin = () => {
+    if (!email.trim() || !password.trim()) {
+      return Alert.alert(t('notification'), t('userEmailPasswordRequired'));
     }
-    LoginService(email, password)
+    loginService(email, password)
       .then(res => {
         if (res.success) {
           if (res.data.token && res.data.userId) {
             LocalStorage.saveToken(res.data.token);
             LocalStorage.saveUserId(res.data.userId);
-            dispatch(FetchUserInfo.action());
+            dispatch(FetchUserInfo.action(res.data.userId));
           }
-          navigation.navigate('Main');
+          navigation.navigate(navigationConstant.MAIN);
         } else {
-          Alert.alert('Notification', 'Username or password invalid !');
+          Alert.alert(t('notification'), t('userEmailPasswordInvalid'));
           setEmail('');
           setPassword('');
         }
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch();
   };
 
   return (
     <View style={[Layout.fill, Gutters.smallHPadding]}>
       <Image source={Images.LoginImage} style={Container.login.image} />
       <View style={Container.login.inputContainer}>
-        <Text style={Container.login.textHeader}>Email</Text>
+        <Text style={Container.login.textHeader}>{t('email')}</Text>
         <TextInput
-          placeholder="Enter you email"
+          placeholder={t('enterYouEmail')}
           style={Container.login.textInputLogin}
           defaultValue={email}
           onChangeText={email => setEmail(email)}
         />
-        <Text style={Container.login.textHeader}>Password</Text>
+        <Text style={Container.login.textHeader}>{t('password')}</Text>
         <TextInput
-          placeholder="Enter you password"
+          placeholder={t('enterYouPassword')}
           defaultValue={password}
           onChangeText={password => setPassword(password)}
           secureTextEntry={true}
           style={[Container.login.textInputLogin]}
         />
         <ButtonLogin
-          title="Login"
+          title={t('buttonLogin')}
           buttonContainer={Container.login.button}
-          onPress={() => ActionLogin()}
+          onPress={() => actionLogin()}
         />
       </View>
     </View>

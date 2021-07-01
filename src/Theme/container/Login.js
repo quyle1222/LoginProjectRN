@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const { width, height } = Dimensions.get('window');
 
 export default function ({ Colors, Gutters, Layout, MetricsSizes }) {
   const configButton = {
@@ -28,9 +29,8 @@ export default function ({ Colors, Gutters, Layout, MetricsSizes }) {
     },
     button: {
       ...configButton,
+      ...Layout.center,
       width: MetricsSizes.large + 170,
-      alignItems: 'center',
-      justifyContent: 'center',
       alignSelf: 'center',
       borderWidth: 2,
       height: MetricsSizes.large + 20,

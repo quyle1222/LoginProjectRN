@@ -1,26 +1,29 @@
 import { ShowInfo } from '@/Components';
 import { Config } from '@/Config';
 import { LocalStorage } from '@/Services/utils/LocalStorage';
+import { navigationConstant } from '@/Services/utils/Navigation';
 import FetchUserInfo from '@/Store/UserInfo/FetchUserInfo';
 import { useTheme } from '@/Theme';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+
 const DetailsContainer = ({ navigation }) => {
   const { Common, Layout, Images, Container } = useTheme();
-  const User = useSelector(state => state.userInfo.userInfo);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const User = useSelector(state => state.userInfo.userInfo);
 
   useEffect(async () => {
     const token = await LocalStorage.getToken();
     if (token) {
-      dispatch(FetchUserInfo.action());
+      const id = await LocalStorage.getUserId();
+      dispatch(FetchUserInfo.action(id));
     } else {
-      navigation.navigate('Login');
+      navigation.navigate(navigationConstant.LOGIN);
     }
   });
-
   const textInfo = [
     User ? User.userFullName : '',
     User ? User.userBirthDay : '',
@@ -29,7 +32,13 @@ const DetailsContainer = ({ navigation }) => {
     User ? User.userShortIntroduction : '',
   ];
 
-  const title = ['Full name', 'Birth day', 'Age', 'Address', 'Intro'];
+  const title = [
+    t('fullName'),
+    t('birthDay'),
+    t('age'),
+    t('address'),
+    t('intro'),
+  ];
 
   const showList = index => {
     return (
@@ -47,7 +56,7 @@ const DetailsContainer = ({ navigation }) => {
       <ImageBackground
         source={Images.backgroundImageDetails}
         style={Layout.fill}>
-        <Text style={Container.details.textHeader}>Profile</Text>
+        <Text style={Container.details.textHeader}>{t('profile')}</Text>
         <Image
           source={{
             uri: `${Config.BASE_URL}${User ? User.userAvatarPath : ''}`,
