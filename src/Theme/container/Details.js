@@ -51,5 +51,14 @@ export default function ({ Colors, Gutters, Layout, FontSize, MetricsSizes }) {
       marginTop: MetricsSizes.large + 20,
       color: Colors.grey,
     },
+    textFullName: {
+      alignSelf: 'center',
+      marginTop: '20%',
+      fontSize: FontSize.regular,
+    },
+    textEmail: {
+      alignSelf: 'center',
+      fontSize: FontSize.regular,
+    },
   });
 }

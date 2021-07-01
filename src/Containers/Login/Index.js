@@ -3,10 +3,12 @@ import { LoginService } from '@/Services/Login/Index';
 import { useTheme } from '@/Theme';
 import React, { useState } from 'react';
 import { Alert, Image, Text, TextInput, View } from 'react-native';
-import { LocalStorage } from '../../Services/utils/LocalStorage';
-
+import { useDispatch } from 'react-redux';
+import { LocalStorage } from '@/Services/utils/LocalStorage';
+import FetchUserInfo from '@/Store/UserInfo/FetchUserInfo';
 const LoginContainer = ({ navigation }) => {
   const { Gutters, Layout, Images, Container } = useTheme();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('lethuhien.qn96@gmail.com');
   const [password, setPassword] = useState('pss201806');
   const ActionLogin = () => {
@@ -22,8 +24,9 @@ const LoginContainer = ({ navigation }) => {
           if (res.data.token && res.data.userId) {
             LocalStorage.saveToken(res.data.token);
             LocalStorage.saveUserId(res.data.userId);
+            dispatch(FetchUserInfo.action());
           }
-          navigation.navigate('Details');
+          navigation.navigate('Main');
         } else {
           Alert.alert('Notification', 'Username or password invalid !');
           setEmail('');

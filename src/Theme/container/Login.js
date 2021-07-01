@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export default function ({ Colors, Gutters, Layout, MetricsSizes }) {
+  const configButton = {
+    ...Gutters.regularTMargin,
+  };
   return StyleSheet.create({
     textInputLogin: {
       borderWidth: 1,
@@ -18,20 +21,21 @@ export default function ({ Colors, Gutters, Layout, MetricsSizes }) {
       fontWeight: 'bold',
     },
     image: {
-      width: 150,
-      height: 150,
+      width: MetricsSizes.large + 120,
+      height: MetricsSizes.large + 120,
       alignSelf: 'center',
       marginTop: '40%',
     },
     button: {
-      width: 200,
+      ...configButton,
+      width: MetricsSizes.large + 170,
       alignItems: 'center',
       justifyContent: 'center',
       alignSelf: 'center',
       borderWidth: 2,
-      height: 50,
+      height: MetricsSizes.large + 20,
       borderRadius: 25,
-      marginTop: 20,
+
       backgroundColor: Colors.backgroundButtonLogin,
       borderColor: 'white',
     },

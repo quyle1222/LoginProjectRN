@@ -3,10 +3,10 @@ import { Config } from '@/Config';
 import { LocalStorage } from '@/Services/utils/LocalStorage';
 import FetchUserInfo from '@/Store/UserInfo/FetchUserInfo';
 import { useTheme } from '@/Theme';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useEffect } from 'react';
 const DetailsContainer = ({ navigation }) => {
   const { Common, Layout, Images, Container } = useTheme();
   const User = useSelector(state => state.userInfo.userInfo);
@@ -15,12 +15,11 @@ const DetailsContainer = ({ navigation }) => {
   useEffect(async () => {
     const token = await LocalStorage.getToken();
     if (token) {
-      await dispatch(FetchUserInfo.action());
+      dispatch(FetchUserInfo.action());
     } else {
-      navigation.navigate('Main');
+      navigation.navigate('Login');
     }
-  }),
-    User;
+  });
 
   const textInfo = [
     User ? User.userFullName : '',
@@ -61,11 +60,10 @@ const DetailsContainer = ({ navigation }) => {
               <Image source={Images.settingIcon} />
               <Image style={{ marginLeft: 'auto' }} source={Images.editIcon} />
             </View>
-            <Text
-              style={{ alignSelf: 'center', marginTop: '20%', fontSize: 30 }}>
+            <Text style={Container.details.textFullName}>
               {User ? User.userFullName : ''}
             </Text>
-            <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 20 }}>
+            <Text style={Container.details.textEmail}>
               {User ? User.userMail : ''}
             </Text>
           </View>
