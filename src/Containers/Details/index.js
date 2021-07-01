@@ -2,7 +2,7 @@ import { ShowInfo } from '@/Components';
 import { Config } from '@/Config';
 import { LocalStorage } from '@/Services/utils/LocalStorage';
 import { navigationConstant } from '@/Services/utils/Navigation';
-import FetchUserInfo from '@/Store/UserInfo/FetchUserInfo';
+import { UserActions } from '../../Store/UserInfo/UserActions';
 import { useTheme } from '@/Theme';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +19,7 @@ const DetailsContainer = ({ navigation }) => {
     const token = await LocalStorage.getToken();
     if (token) {
       const id = await LocalStorage.getUserId();
-      dispatch(FetchUserInfo.action(id));
+      dispatch(UserActions.userInfo.action(id));
     } else {
       navigation.navigate(navigationConstant.LOGIN);
     }

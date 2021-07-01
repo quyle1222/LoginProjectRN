@@ -6,7 +6,7 @@ import { Alert, Image, Text, TextInput, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { LocalStorage } from '@/Services/utils/LocalStorage';
-import FetchUserInfo from '@/Store/UserInfo/FetchUserInfo';
+import { UserActions } from '../../Store/UserInfo/UserActions';
 import { navigationConstant } from '@/Services/utils/Navigation';
 const LoginContainer = ({ navigation }) => {
   const { Gutters, Layout, Images, Container } = useTheme();
@@ -24,7 +24,7 @@ const LoginContainer = ({ navigation }) => {
           if (res.data.token && res.data.userId) {
             LocalStorage.saveToken(res.data.token);
             LocalStorage.saveUserId(res.data.userId);
-            dispatch(FetchUserInfo.action(res.data.userId));
+            dispatch(UserActions.userInfo.action(res.data.userId));
           }
           navigation.navigate(navigationConstant.MAIN);
         } else {

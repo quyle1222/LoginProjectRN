@@ -5,7 +5,7 @@ import {
 } from '@thecodingmachine/redux-toolkit-wrapper';
 import detailsService from '@/Services/Details/DetailsService';
 
-export default {
+const userInfo = {
   initialState: buildAsyncState('fetchUserInfo'),
   action: buildAsyncActions('userInfo/fetchUserInfo', detailsService),
   reducers: buildAsyncReducers({
@@ -13,4 +13,8 @@ export default {
     loadingKey: 'fetchUserInfo.loading',
     itemKey: 'userInfo',
   }),
+};
+
+export const UserActions = {
+  userInfo,
 };
