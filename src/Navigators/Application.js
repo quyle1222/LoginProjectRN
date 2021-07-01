@@ -50,8 +50,8 @@ const ApplicationNavigator = () => {
               }}
             />
           )}
-          <Stack.Screen name="Details" component={DetailsContainer} />
-          <Stack.Screen name="Main" component={LoginContainer} />
+          <Stack.Screen name="Main" component={DetailsContainer} />
+          <Stack.Screen name="Login" component={LoginContainer} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
