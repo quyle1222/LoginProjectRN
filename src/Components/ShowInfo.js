@@ -10,8 +10,5 @@ const ShowInfo = ({ title, textInfo, styleContainer, styleText }) => {
     </View>
   );
 };
-ShowInfo.defaultProps = {
-  title: 'text',
-  textInfo: 'text Info',
-};
+
 export default ShowInfo;

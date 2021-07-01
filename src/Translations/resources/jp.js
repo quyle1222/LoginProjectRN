@@ -17,7 +17,6 @@ export default {
   userEmailPasswordRequired: 'User email and password is required !',
   userEmailPasswordInvalid: 'Email or password invalid ! ',
   buttonLogin: 'Login',
-  profile: 'Profile',
   fullName: 'Full name',
   birthDay: 'Birth day',
   age: 'Age',
