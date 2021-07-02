@@ -20,11 +20,11 @@ export const Colors = {
   error: '#dc3545',
   backgroundButtonLogin: '#8699DA',
   grey: '#747474',
-};
+}
 
 export const NavigationColors = {
   primary: Colors.primary,
-};
+}
 
 /**
  * FontSize
@@ -34,19 +34,19 @@ export const FontSize = {
   small: 16,
   regular: 20,
   large: 40,
-};
+}
 
 /**
  * Metrics Sizes
  */
 
-const tiny = 5; // 10
-const small = tiny * 2; // 10
-const regular = tiny * 3; // 15
-const large = regular * 2; // 30
+const tiny = 5 // 10
+const small = tiny * 2 // 10
+const regular = tiny * 3 // 15
+const large = regular * 2 // 30
 export const MetricsSizes = {
   tiny,
   small,
   regular,
   large,
-};
+}

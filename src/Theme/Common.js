@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import buttonStyles from './components/Buttons';
-import { FontSize } from './Variables';
+import { StyleSheet } from 'react-native'
+import buttonStyles from './components/Buttons'
+import { FontSize } from './Variables'
 
 export default function ({ Colors, ...args }) {
   return {
@@ -100,5 +100,5 @@ export default function ({ Colors, ...args }) {
         color: Colors.grey,
       },
     }),
-  };
+  }
 }

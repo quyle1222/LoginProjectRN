@@ -10,5 +10,5 @@ export default function () {
     backgroundImageDetails: require('@/Assets/Images/background.jpg'),
     settingIcon: require('@/Assets/Images/setting.png'),
     editIcon: require('@/Assets/Images/edit.png'),
-  };
+  }
 }

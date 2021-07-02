@@ -1,21 +1,21 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export default function ({ Colors, Gutters, Layout, FontSize, MetricsSizes }) {
   const configTextHeader = {
     ...Gutters.smallTMargin,
     ...Gutters.smallLMargin,
-  };
+  }
 
   const configCardView = {
     ...Gutters.regularLMargin,
     ...Gutters.regularRMargin,
-  };
+  }
   const configFieldContainer = {
     ...Layout.fullWidth,
     ...Layout.row,
     ...Gutters.smallHPadding,
     ...Gutters.smallVPadding,
-  };
+  }
 
   return StyleSheet.create({
     textHeader: {
@@ -60,5 +60,5 @@ export default function ({ Colors, Gutters, Layout, FontSize, MetricsSizes }) {
       alignSelf: 'center',
       fontSize: FontSize.regular,
     },
-  });
+  })
 }

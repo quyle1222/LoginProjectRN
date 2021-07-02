@@ -2,8 +2,8 @@ import {
   buildAsyncState,
   buildAsyncReducers,
   buildAsyncActions,
-} from '@thecodingmachine/redux-toolkit-wrapper';
-import detailsService from '@/Services/Details/DetailsService';
+} from '@thecodingmachine/redux-toolkit-wrapper'
+import detailsService from '@/Services/Details/DetailsService'
 
 const userInfo = {
   initialState: buildAsyncState('fetchUserInfo'),
@@ -13,8 +13,8 @@ const userInfo = {
     loadingKey: 'fetchUserInfo.loading',
     itemKey: 'userInfo',
   }),
-};
+}
 
 export const UserActions = {
   userInfo,
-};
+}

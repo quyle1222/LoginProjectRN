@@ -2,20 +2,44 @@ import { ShowInfo } from '@/Components';
 import { Config } from '@/Config';
 import { LocalStorage } from '@/Services/utils/LocalStorage';
 import { navigationConstant } from '@/Services/utils/Navigation';
-import { UserActions } from '../../Store/UserInfo/UserActions';
 import { useTheme } from '@/Theme';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  NativeModules,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { UserActions } from '../../Store/UserInfo/UserActions';
 
 const DetailsContainer = ({ navigation }) => {
   const { Common, Layout, Images, Container } = useTheme();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const locale = NativeModules.I18nManager.localeIdentifier;
+
   const User = useSelector(state => state.userInfo.userInfo);
 
+  const changeLanguage = lang => {
+    i18n.changeLanguage(lang);
+  };
+
+  const checkLanguage = () => {
+    if (locale === 'jp_JP') {
+      changeLanguage('jp');
+    } else {
+      changeLanguage('en');
+    }
+  };
+
   useEffect(async () => {
+    () => checkLanguage();
     const token = await LocalStorage.getToken();
     if (token) {
       const id = await LocalStorage.getUserId();
@@ -86,6 +110,12 @@ const DetailsContainer = ({ navigation }) => {
             {showList(4)}
           </ScrollView>
         </View>
+        <TouchableOpacity onPress={() => changeLanguage('en')}>
+          <Text>EN</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => changeLanguage('jp')}>
+          <Text>JP</Text>
+        </TouchableOpacity>
       </ImageBackground>
     </View>
   );

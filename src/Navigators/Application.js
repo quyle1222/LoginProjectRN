@@ -1,40 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { IndexStartupContainer, LoginContainer } from '@/Containers';
-import { useSelector } from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
-import { navigationRef } from '@/Navigators/Root';
-import { SafeAreaView, StatusBar } from 'react-native';
-import { useTheme } from '@/Theme';
-import { DetailsContainer } from '@/Containers';
-import { navigationConstant } from '@/Services/utils/Navigation';
+import React, { useEffect, useState } from 'react'
+import { createStackNavigator } from '@react-navigation/stack'
+import { IndexStartupContainer, LoginContainer } from '@/Containers'
+import { useSelector } from 'react-redux'
+import { NavigationContainer } from '@react-navigation/native'
+import { navigationRef } from '@/Navigators/Root'
+import { SafeAreaView, StatusBar } from 'react-native'
+import { useTheme } from '@/Theme'
+import { DetailsContainer } from '@/Containers'
+import { navigationConstant } from '@/Services/utils/Navigation'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
-let MainNavigator;
+let MainNavigator
 
 // @refresh reset
 const ApplicationNavigator = () => {
-  const { Layout, darkMode, NavigationTheme } = useTheme();
-  const { colors } = NavigationTheme;
-  const [isApplicationLoaded, setIsApplicationLoaded] = useState(false);
-  const applicationIsLoading = useSelector(state => state.startup.loading);
+  const { Layout, darkMode, NavigationTheme } = useTheme()
+  const { colors } = NavigationTheme
+  const [isApplicationLoaded, setIsApplicationLoaded] = useState(false)
+  const applicationIsLoading = useSelector(state => state.startup.loading)
 
   useEffect(() => {
     if (MainNavigator == null && !applicationIsLoading) {
-      MainNavigator = require('@/Navigators/Main').default;
-      setIsApplicationLoaded(true);
+      MainNavigator = require('@/Navigators/Main').default
+      setIsApplicationLoaded(true)
     }
-  }, [applicationIsLoading]);
+  }, [applicationIsLoading])
 
   // on destroy needed to be able to reset when app close in background (Android)
   useEffect(
     () => () => {
-      setIsApplicationLoaded(false);
-      MainNavigator = null;
+      setIsApplicationLoaded(false)
+      MainNavigator = null
     },
     [],
-  );
+  )
 
   return (
     <SafeAreaView style={[Layout.fill, { backgroundColor: colors.card }]}>
@@ -65,7 +65,7 @@ const ApplicationNavigator = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default ApplicationNavigator;
+export default ApplicationNavigator

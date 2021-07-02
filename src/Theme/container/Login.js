@@ -1,10 +1,10 @@
-import { StyleSheet, Dimensions } from 'react-native';
-const { width, height } = Dimensions.get('window');
+import { StyleSheet, Dimensions } from 'react-native'
+const { width, height } = Dimensions.get('window')
 
 export default function ({ Colors, Gutters, Layout, MetricsSizes }) {
   const configButton = {
     ...Gutters.regularTMargin,
-  };
+  }
   return StyleSheet.create({
     textInputLogin: {
       borderWidth: 1,
@@ -42,5 +42,5 @@ export default function ({ Colors, Gutters, Layout, MetricsSizes }) {
     inputContainer: {
       marginTop: '5%',
     },
-  });
+  })
 }
