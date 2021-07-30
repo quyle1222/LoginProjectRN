@@ -1,1 +1,1 @@
-export { default as detailsService } from './DetailsService';
+export { default as detailsService } from './DetailsService'

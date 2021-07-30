@@ -1,40 +1,40 @@
-import { ButtonLogin } from '@/Components';
-import { loginService } from '@/Services/Login/Index';
-import { useTheme } from '@/Theme';
-import React, { useState } from 'react';
-import { Alert, Image, Text, TextInput, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { LocalStorage } from '@/Services/utils/LocalStorage';
-import { UserActions } from '../../Store/UserInfo/UserActions';
-import { navigationConstant } from '@/Services/utils/Navigation';
+import { ButtonLogin } from '@/Components'
+import { loginService } from '@/Services/Login/Index'
+import { useTheme } from '@/Theme'
+import React, { useState } from 'react'
+import { Alert, Image, Text, TextInput, View } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { LocalStorage } from '@/Services/utils/LocalStorage'
+import { UserActions } from '../../Store/UserInfo/UserActions'
+import { navigationConstant } from '@/Services/utils/Navigation'
 const LoginContainer = ({ navigation }) => {
-  const { Gutters, Layout, Images, Container } = useTheme();
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { t } = useTranslation();
+  const { Gutters, Layout, Images, Container } = useTheme()
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { t } = useTranslation()
   const actionLogin = () => {
     if (!email.trim() || !password.trim()) {
-      return Alert.alert(t('notification'), t('userEmailPasswordRequired'));
+      return Alert.alert(t('notification'), t('userEmailPasswordRequired'))
     }
     loginService(email, password)
       .then(res => {
         if (res.success) {
           if (res.data.token && res.data.userId) {
-            LocalStorage.saveToken(res.data.token);
-            LocalStorage.saveUserId(res.data.userId);
-            dispatch(UserActions.userInfo.action(res.data.userId));
+            LocalStorage.saveToken(res.data.token)
+            LocalStorage.saveUserId(res.data.userId)
+            dispatch(UserActions.userInfo.action(res.data.userId))
           }
-          navigation.navigate(navigationConstant.MAIN);
+          navigation.navigate(navigationConstant.MAIN)
         } else {
-          Alert.alert(t('notification'), t('userEmailPasswordInvalid'));
-          setEmail('');
-          setPassword('');
+          Alert.alert(t('notification'), t('userEmailPasswordInvalid'))
+          setEmail('')
+          setPassword('')
         }
       })
-      .catch();
-  };
+      .catch()
+  }
 
   return (
     <View style={[Layout.fill, Gutters.smallHPadding]}>
@@ -62,6 +62,6 @@ const LoginContainer = ({ navigation }) => {
         />
       </View>
     </View>
-  );
-};
-export default LoginContainer;
+  )
+}
+export default LoginContainer

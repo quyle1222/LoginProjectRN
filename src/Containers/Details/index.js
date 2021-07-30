@@ -1,36 +1,38 @@
-import { ShowInfo } from '@/Components';
-import { Config } from '@/Config';
-import { LocalStorage } from '@/Services/utils/LocalStorage';
-import { navigationConstant } from '@/Services/utils/Navigation';
-import { UserActions } from '../../Store/UserInfo/UserActions';
-import { useTheme } from '@/Theme';
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { ShowInfo } from '@/Components'
+import { Config } from '@/Config'
+import { LocalStorage } from '@/Services/utils/LocalStorage'
+import { navigationConstant } from '@/Services/utils/Navigation'
+import { UserActions } from '../../Store/UserInfo/UserActions'
+import { useTheme } from '@/Theme'
+import React, { useEffect } from 'react'
+
+import { useTranslation } from 'react-i18next'
+import { Image, ImageBackground, ScrollView, Text, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 
 const DetailsContainer = ({ navigation }) => {
-  const { Common, Layout, Images, Container } = useTheme();
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const User = useSelector(state => state.userInfo.userInfo);
+  const { Common, Layout, Images, Container } = useTheme()
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+
+  const User = useSelector(state => state.userInfo.userInfo)
 
   useEffect(async () => {
-    const token = await LocalStorage.getToken();
+    const token = await LocalStorage.getToken()
     if (token) {
-      const id = await LocalStorage.getUserId();
-      dispatch(UserActions.userInfo.action(id));
+      const id = await LocalStorage.getUserId()
+      dispatch(UserActions.userInfo.action(id))
     } else {
-      navigation.navigate(navigationConstant.LOGIN);
+      navigation.navigate(navigationConstant.LOGIN)
     }
-  });
+  })
   const textInfo = [
     User ? User.userFullName : '',
     User ? User.userBirthDay : '',
     User ? User.userAge : '',
     User ? User.userAddress : '',
     User ? User.userShortIntroduction : '',
-  ];
+  ]
 
   const title = [
     t('fullName'),
@@ -38,7 +40,7 @@ const DetailsContainer = ({ navigation }) => {
     t('age'),
     t('address'),
     t('intro'),
-  ];
+  ]
 
   const showList = index => {
     return (
@@ -48,8 +50,8 @@ const DetailsContainer = ({ navigation }) => {
         stylesContainer={Container.details.fieldContainer}
         styleText={Container.details.textField}
       />
-    );
-  };
+    )
+  }
 
   return (
     <View style={Layout.fullSize}>
@@ -88,7 +90,7 @@ const DetailsContainer = ({ navigation }) => {
         </View>
       </ImageBackground>
     </View>
-  );
-};
+  )
+}
 
-export default DetailsContainer;
+export default DetailsContainer

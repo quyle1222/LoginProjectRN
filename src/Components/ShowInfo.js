@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from 'react'
+import { Text, View } from 'react-native'
 
 const ShowInfo = ({ title, textInfo, styleContainer, styleText }) => {
   return (
@@ -8,7 +8,7 @@ const ShowInfo = ({ title, textInfo, styleContainer, styleText }) => {
         {title}: {textInfo}
       </Text>
     </View>
-  );
-};
+  )
+}
 
-export default ShowInfo;
+export default ShowInfo

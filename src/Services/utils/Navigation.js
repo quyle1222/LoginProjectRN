@@ -3,4 +3,4 @@ export const navigationConstant = {
   LOGIN: 'Login',
   STARTUP: 'Startup',
   HOME: 'Home',
-};
+}

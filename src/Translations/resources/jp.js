@@ -22,4 +22,4 @@ export default {
   age: 'Age',
   address: 'Address',
   intro: 'Intro',
-};
+}
